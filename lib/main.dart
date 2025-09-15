@@ -36,26 +36,11 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _currentindex = 0;
 
-  network n = network();
-
-  Future<void> _searchBooks(String query) async {
-    try{
-      List<Book> books= await n.searchBooks(query);
-      print("Books:${books.toString()}");
-    }catch(e){
-
-    }
-
-  }
   final List<Widget> _screens = [
     HomeScreen(),
     SavedScreen(),
     FavouriteScreen(),
   ];
-  void initState(){
-    _searchBooks('Android');
-    super.initState();
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
