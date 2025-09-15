@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Book book=_books[index];
               return ListTile(
                 title: Text(book.title),
-                subtitle: Text(book.authors.join(', &')??''),
+                subtitle: Text(book.authors.join(', &') ?? ''),
               );
             }),
           ),
