@@ -30,35 +30,62 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Column(children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: TextField(
-            decoration: InputDecoration(
-              hintText: 'Search For Book',
-              suffixIcon: Icon(Icons.search),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10))
+      body: Center(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: 'Search For Book',
+                  suffixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                ),
+                onSubmitted: (query) => _searchBooks(query),
               ),
             ),
-            onSubmitted: (query) =>_searchBooks(query),
-          ),
+            Expanded(
+              child: GridView.builder(
+                itemCount: _books.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 0.6,
+                ),
+                itemBuilder: (context, index) {
+                  Book book=_books[index];
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.surfaceVariant,
+                      borderRadius: const BorderRadius.all(Radius.circular(10))
+                    ),
+                    child: Column(
+                      children: [
+                        Image.network(book.imageLinks['thumbnails']??'')
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+            // Expanded(
+            //   child: SizedBox(
+            //     width: double.infinity,
+            //     child: ListView.builder(
+            //       itemCount: _books.length,
+            //         itemBuilder: (context,index){
+            //           Book book=_books[index];
+            //       return ListTile(
+            //         title: Text(book.title),
+            //         subtitle: Text(book.authors.join(', &') ?? ''),
+            //       );
+            //     }),
+            //   ),
+            // )
+          ],
         ),
-        // Expanded(
-        //   child: SizedBox(
-        //     width: double.infinity,
-        //     child: ListView.builder(
-        //       itemCount: _books.length,
-        //         itemBuilder: (context,index){
-        //           Book book=_books[index];
-        //       return ListTile(
-        //         title: Text(book.title),
-        //         subtitle: Text(book.authors.join(', &') ?? ''),
-        //       );
-        //     }),
-        //   ),
-        // )
-      ])),
+      ),
     );
   }
 }
