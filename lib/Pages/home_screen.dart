@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         Expanded(
-          child: Container(
+          child: SizedBox(
             width: double.infinity,
             child: ListView.builder(
               itemCount: _books.length,
